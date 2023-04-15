@@ -1,0 +1,10 @@
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+svg > text {
+    font-family: 'Gill Sans';
+}
+

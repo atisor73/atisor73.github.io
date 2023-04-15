@@ -1,0 +1,58 @@
+:root {
+    --bg_color: #fcfcfc; /* #f0f0f0*/
+    --nav_not_selected_color: #787878;
+}
+
+body {
+    background-color: var(--bg_color) !important;
+}
+
+#navbar {
+    margin-top: 30px !important;
+    width: 90%; /* makes overall bootstrap container narrower */
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13pt;
+    color: black;
+}
+
+a { 
+    text-decoration: none !important; 
+    color: var(--nav_not_selected_color) !important;
+}
+
+.underlined {
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+    text-decoration-thickness: 2px;
+}
+
+/* animating underlines */
+.hover-underline {
+    display: inline-block;
+    position: relative;
+    color: black; 
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0%;
+    background-color: black;
+    transform-origin: bottom left;
+    transition: transform 0.5s ease-out;
+}
+
+.hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.container {
+      max-width: 800px !important; 
+}
+
+  

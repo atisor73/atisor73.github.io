@@ -1,0 +1,102 @@
+:root {
+    --post_color: #f6f6f6; /* #fafafa */
+    --height-post: 190px;
+}
+
+/* decorating post rectangles (box-shadow*/
+.post {
+    background-color: var(--post_color) !important;
+    border-radius: 2px;
+    height: 100%; 
+    margin-top: 30px;
+    /* box-shadow: -5px -5px 8px rgba(70,70,70,0.05),
+            5px 5px 8px rgba(70,70,70,0.12); */
+            box-shadow: -5px -5px 6px rgba(255,255,255,0.45), 
+            5px 5px 6px rgba(94,104,121,0.2);
+}
+
+/* post zoom on hover*/ 
+.post:hover { 
+    transform: scale(1.01);
+    transition-duration: 100ms;
+}
+
+
+/* setting post height */
+.post > .row {
+    max-height: var(--height-post);
+}
+/* cropping post image to size of div */
+.post-image {
+    overflow: hidden;
+}
+
+.post-image > img { 
+    width: 140%;
+    transform: translate(-15%, 0%);
+    height: var(--height-post);
+    object-fit: cover;
+}
+
+/* ************** make b&w until hover... ************** */ 
+/* .post-image > img { 
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+.post:hover .post-image > img {
+    filter: none;
+    -webkit-filter: grayscale(0);
+} */
+/* ************************************************** */ 
+
+
+.post-image.right {
+    border-radius: 0px 2px 2px 0px;
+}
+.post-image.left {
+    border-radius: 9px 0px 0px 2px;
+}
+
+/* defining font, padding of post heading*/ 
+.post-heading {
+    font-family: 'Arvo', sans-serif; 
+    font-size: 15pt;
+    color: black !important;
+
+    padding-top: 15px;
+    padding-bottom: 10px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 10px;
+
+    line-height: 22pt;
+    
+    border-bottom: 1.5px solid #dadada; /* line color of horizontal break*/ 
+    /* border-style: dashed; */
+}
+
+.post-desc {
+    font-family:  'Source Serif Pro', sans-serif; 
+    font-size: 11pt;
+    color: #565656;
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    /* border-style: dashed; */
+}
+
+
+
+#footer {
+    margin-top: 65px;
+    margin-bottom: 30px;
+    /* font-family: 'Roboto Slab' , sans-serif;
+    font-size: 9pt; */
+    font-family: 'Jost' , sans-serif;
+    font-size: 11pt;
+    color: #909090;
+}

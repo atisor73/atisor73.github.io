@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href=""/>
+    <link rel="stylesheet" href="../../main.css"/>
+    <link rel="stylesheet" href="../posts.css"/>
+    <link rel="stylesheet" href="multiple_concern_arcs.css"/>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost&family=Roboto+Slab&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- icon for github -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <!-- adding d3 -->
+    <script type="text/javascript" src="../../d3.js"></script>
+    
+    <!-- load mathjax -->
+    <script src="../../load-mathjax.js" async></script>
+
+    <!-- setting viewport? -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Arc diagrams in d3</title>
+</head>
+
+
+<body>
+    <script src=""></script>
+   
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    
+
+    <!-- first row is nav bar -->
+    <!-- depending on what is selected, display the following links -->
+    <div class="container-fluid" id="navbar">
+        <div class="row justify-content-end"> 
+            <div class="col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 justify-content-end" align="right" >
+                <div class="hover-underline" style="float: left; margin: 4%">
+                    <a href="../../about/about.html">
+                        About
+                    </a>
+                </div>
+                <div class="hover-underline underlined" style="float: left; margin: 4%">
+                    <a href="../projects.html">
+                        <span style="color: black;"> Projects </span>
+                    </a>
+                </div>
+                <div class="hover-underline" style="float: left; margin: 4%">
+                    <a href="../../drawings/drawings.html">
+                        Drawings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+
+
+    <!-- ************** CODE HIGHLIGHTING WITH HIGHLIGHT.js ************** -->
+    <!-- ***************** INLINE MARKDOWN WITH md-block ***************** -->
+
+    <!-- <link rel="stylesheet" href="../../highlight/styles/default.min.css"> -->
+    <link rel="stylesheet" href="../../highlight/styles/foundation.min.css">
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <script src="../../highlight/highlight.min.js"></script>
+<!-- 
+default.min.js 
+foundation.min.css 
+routeros.min.css 
+stackoverflow-light.min.css 
+base16/mexico-light.min.css
+-->
+
+
+    <!-- START POST!!! -->
+    <div class="container post-block">
+    <div class="row justify-content-center"> 
+    <div class="col-10">
+
+    <!-- using md-block to render markdown in html -->
+    <md-block>
+    # Arc diagrams in d3
+    As this is my first d3 creation, this is in no way meant to be a well-thought-out 
+    tutorial. I came across a part of my dataset that inspired an arc diagram, and had
+     trouble finding a way to incoorporate <span style="color:#ac0d0d">gradients</span>, 
+     <span style="color:#ac0d0d">clickability</span>, and 
+     <span style="color:#ac0d0d">varying svg arc-widths</span>, 
+     and felt like sharing after figuring it out. 
+     In the graphic below, each letter's node highlights and recolors all emanating edges upon a
+     <span style="color:#ac0d0d">click-event</span>.
+
+    </md-block>
+
+    <div id="container-svg"></div>
+    <script src="multiple_concerns_arcs.js"></script>
+
+    <br>
+
+    <md-block>
+    ### Motivations
+        <hr>
+
+    In this dataset, each subject can qualify for many categories (A - I), and we anticipate that 
+    <span style="color:#ac0d0d">qualifying for a certain category changes the probability of qualifying for another.
+    </span> The larger question at hand is which categories show up together at higher rates than expected.
+    
+    Now an arc diagram arguably isn't
+    a good way to think about this quantitatively, especially since the total population
+    for each category (loosely represented by the size of the node) is so variable, 
+    but a visual representation won't hurt. The first half of this post will be dedicated to the 
+    mechanics behind the visual, and the second half to the actual problem at hand.
+
+    <span style="color:#ac0d0d">SVG gradients</span> were in theory a work-around to the usual messiness of arc diagrams, which usually 
+    rely on tuning the transparency or applying a (single) color to the arc. As for the dome-y hemisphere look, 
+    I find chord diagrams (the alternative) difficult to read and analyze, even at peak interactivity.
+
+    <br>
+
+    ### Cleaning the data
+    <hr>
+    
+    The original dataset (top) is cleaned using R to its plottable form (bottom). 
+    The number of occurrences of each *pair* of letters are counted and sorted alphabetically.
+    I will also keep track of the number of solo occurrences of each letter, for later on.
+
+| subject | categories | 
+| :-----: | :--------- |
+| id1     | A,D,F      |
+| id2     | G          |
+| id3     | A,E,F,I    |
+| &#x2022;&#x2022;&#x2022;   | &#x2022;&#x2022;&#x2022; |
+
+
+| pairing |   count    | 
+| :-----: | ---------: |
+| AB      |  2,795     |
+| AC      |    10,812  |
+| &#x2022;&#x2022;&#x2022;   | &#x2022;&#x2022;&#x2022;  |
+| HI      |    406     |
+
+
+    The javascript data arrays/objects look like this: 
+
+    </md-block>
+
+    <pre><code>
+        var data = [
+            {code1: 'A', code2: 'B', count: 2795},
+            {code1: 'A', code2: 'C', count: 10812},
+            ... 
+            {code1: 'H', code2: 'I', count: 406}
+        ];
+
+        var palette = {
+            "A": "#303359",
+            "B": "#8B8BAE",
+            "C": "#6AB3BF",
+            "D": "#DC996A",
+            "E": "#A84D60",
+            "F": "#D8CA26",
+            "G": "#D6A3B7",
+            "H": "#77A289",
+            "I": "#A45A36"
+        };
+    </code></pre>
+
+        
+    <md-block>
+    <br>
+
+    ### The loopiness of it all
+    <hr> 
+
+    This project unfortunately defaults to `for` loops instead of employing 
+    the elegant scheme of `data()`, `enter()`, and `append()` in d3. The main issue 
+    I faced was indexing the pairwise gradients that needed to be created based on 
+    the beginning and ending node's position (please reach out if you know of a better way!).
+
+    <br>
+
+    ### Creating data-based gradients
+    <hr> 
+
+    Let's begin! I'll start with the gradients, as this was what gave me the most trouble.
+    The idea is to have some sort of "library" of gradients (called `defs`), one for every arc, by attaching a
+    corresponding `id`. (In this case, the datum index is sufficient in this graphic as the dataset 
+    is never re-ordered, but a key value would be more robust). 
+    
+    I followed <a class="post" target="_blank" 
+        href="https://www.freshconsulting.com/insights/blog/d3-js-gradients-the-easy-way/">
+        Sirius Strebe's article</a>, 
+    and adjusted the offsets of the "start" and "end" points of the gradients (from 0-100% to 20-80%). 
+    This results in a gradient that remains a solid color for longer on both ends. The (x1, y1) and (x2, y2)
+    are set to (0%, 100%) and (100%, 100%), to create a gradient that shades only in the x-direction (i.e., stays 100%
+    the color it is set to in the y-axis). Finally, `stop-colors` are set to each arc's `code1` and `code2` 
+    values (the two end nodes). 
+    </md-block>
+
+    <pre><code class="language-javascript">
+        var defs = svg.append("defs");
+
+        for (i = 0; i < data.length; i++) {
+            var d = data[i];
+
+            var gradient = defs.append("linearGradient")
+                .attr("id", "svgGradient" + i)
+                .attr("x1", "0%")
+                .attr("x2", "100%")
+                .attr("y1", "100%")
+                .attr("y2", "100%");
+
+            gradient.append("stop")
+                .attr("class", "start")
+                .attr("offset", "20%")
+                .attr("stop-color", palette_concern[d.code1])
+                .attr("stop-opacity", 1);
+
+            gradient.append("stop")
+                .attr("class", "end")
+                .attr("offset", "80%")
+                .attr("stop-color", palette_concern[d.code2])
+                .attr("stop-opacity", 1);
+        }
+    </code></pre>
+
+
+
+    <md-block>
+    <br>
+
+    ### Drawing the arcs 
+    <hr> 
+
+    With defined gradients, we can start drawing the arcs by appending a path for every row in the data.
+    `x1` and `x2` are retrieved with an 
+    <a href="https://observablehq.com/@d3/d3-scaleordinal" target="_blank" class="post">ordinal scale</a>,
+    and the width of the arc is set proportional to the observed counts. An intermediate `r_avg` variable
+    is created to center the arcs to their ordinal scale's positioning. The arc's position in the svg is 
+    determined by its center (the midpoint of `x1` and `x2`).
+    The fill is then set to the url gradient we created earlier. 
+    </md-block>
+
+    <pre><code class="language-javascript">
+        for (i = 0; i < data.length; i++) {
+            var d = data[i];
+        
+            var x1 = scale_x(d.code1),
+                x2 = scale_x(d.code2);
+        
+            var width = scale_width(d.count),
+                r_avg = (x2 - x1) / 2.0,
+                r_inner = r_avg - width/2.0,
+                r_outer = r_avg + width/2.0 ; 
+        
+            var arc = d3.arc()
+                .innerRadius(r_inner)
+                .outerRadius(r_outer)
+                .startAngle(-Math.PI/2)
+                .endAngle(Math.PI/2);
+        
+            var move_x = x1 + (x2 - x1)/2.0
+            var move_y = baseline_height;
+        
+            svg.append("path")
+                .attr("class", "arcs" + " " + d.code1 + " " + d.code2)
+                .attr("d", arc)
+                .attr("fill", "url(#svgGradient" + i + ")")
+                .attr('transform', "translate(" + move_x + "," + move_y + ")");
+                
+        }
+    </code></pre>
+
+    <md-block>
+    <br>
+
+    ### Drawing clickable nodes
+    <hr>
+
+    We want to bind the click-events to the nodes, so we first draw some circles, scaling the radius by the count.
+    </md-block>
+
+    <pre><code class="language-javascript">
+        var data_node_counts = [
+            {code: 'A', count: 4800},
+            {code: 'B', count: 2560},
+            {code: 'C', count: 26562},
+            {code: 'D', count: 3892},
+            {code: 'E', count: 13691},
+            {code: 'F', count: 29841},
+            {code: 'G', count: 9981},
+            {code: 'H', count: 71312},
+            {code: 'I', count: 1272},
+        ]
+
+        var nodes = svg
+            .selectAll("circle")
+            .data(data_node_counts)
+            .enter()
+            .append("circle")
+            .attr("class", "nodes")
+            .attr("id", d => d.code)
+            .attr("cx", function(d){ return scale_x(d.code); })
+            .attr("cy", baseline_height) 
+            .attr("r", function(d) { return scale_r(d.count); })
+            .style("fill", function(d) { return palette_concern[d.code]; })
+    
+    </code></pre>
+
+    <md-block>
+        <br>
+
+        The clickable behavior is a little more challenging. First, we turn all arcs and nodes grey. 
+        To highlight all arcs belonging to the selected node, we retrieve the node's value and color.
+        If you noticed earlier, when drawing the nodes, each one was assigned an `id` so that we could 
+        color that node upon selection. When drawing the arcs, each one was assigned two `class`es: 
+        one for each of its nodes. This way, we can select multiple arcs (hence class) for each unique node (hence id)
+        upon a click-event.
+
+        The node and arcs are re-colored, and the selected arcs are raised to the front.
+    </md-block>
+
+    <pre><code>
+        nodes.on("click", function() {
+            // ------- turn everything grey 
+            svg.selectAll(".arcs").attr("fill", "#dfdfdf")
+            svg.selectAll(".nodes").style("fill", "#dfdfdf")
+        
+            // ------- Get associated data from selected node
+            var code_selected = d3.select(this).data()[0].code,
+                color_selected = palette_concern[code_selected];
+        
+            // ------- select node
+            id_selected = "#" + code_selected
+            svg.selectAll(id_selected)
+                .style("fill", color_selected)
+        
+            // ------- select arcs
+            class_selected = "." + code_selected
+            svg.selectAll(class_selected)
+                .attr("fill", color_selected)
+                .raise()
+        
+        })
+    </code></pre>
+
+    <md-block>
+    <br>
+
+    ### How to exit?
+    <hr>
+
+    We're not done yet! We want to be able to return to gradient-mode when clicking outside of the svg. 
+    The trick is to draw an invisible rectangle *behind* everything, and then add an event-handler.
+    We can use the same selection scheme as above. 
+    </md-block>
+
+    <pre><code class="language-javascript">
+        bg_rect.on("click", function() {
+            // change nodes back to original colors 
+            for (j = 0; j < Object.keys(class_concern).length + 1; j++) {
+                svg.select("#" + class_concern[j])
+                    .style("fill", palette_concern[j])
+            }
+            // select arc that matches datum, change its fill back to original gradient
+            for (i = 0; i < data.length; i++) {
+                var d = data[i];
+                svg.select(".arcs" + "." + class_concern[d.code1] + "." + class_concern[d.code2])
+                    .attr("fill", "url(#svgGradient" + i + ")")
+            }
+        })
+    </code></pre>
+    
+    <md-block>
+        And that's it!
+    </md-block>
+
+
+
+<!-- ADDD BACK BUTTON -->
+
+    <!-- apply all syntax highlighting to code cells -->
+    <script>hljs.highlightAll();</script> 
+
+
+    <div class="row justify-content-center" id="footer"> 
+        <div class="footer col-11 col-sm-11 col-md-10 col-lg-10 col-xl-10" id="footer">
+            <div class="container text-center"> © 2023 Rosita Fu. MIT license. <br></div>
+
+        </div>
+    </div>
+    <!-- end bootstrap column -->
+    </div></div></div>
+
+</body>
+</html>
+
