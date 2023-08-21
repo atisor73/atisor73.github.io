@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href=""/>
+    <link rel="stylesheet" href="../../main.css"/>
+    <link rel="stylesheet" href="../posts.css"/>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost&family=Roboto+Slab&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- icon for github -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <!-- adding d3 -->
+    <script type="text/javascript" src="../../dependencies/d3.js"></script>
+
+    <!-- load mathjax -->
+    <script src="../../dependencies/load-mathjax.js" async></script>
+
+    <!-- setting viewport? -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Julio Le Parc</title>
+</head>
+
+
+<body>
+    <script src=""></script>
+   
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    
+
+    <!-- first row is nav bar -->
+    <!-- depending on what is selected, display the following links -->
+    <div class="container-fluid" id="navbar">
+        <div class="row justify-content-end"> 
+            <div class="col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 justify-content-end" align="right" >
+                <div class="hover-underline" style="float: left; margin: 4%">
+                    <a href="../../about/">
+                        About
+                    </a>
+                </div>
+                <div class="hover-underline underlined" style="float: left; margin: 4%">
+                    <a href="../">
+                        <span style="color: black;"> Projects </span>
+                    </a>
+                </div>
+                <div class="hover-underline" style="float: left; margin: 4%">
+                    <a href="../../drawings/">
+                        Drawings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+
+
+    <!-- ************** CODE HIGHLIGHTING WITH HIGHLIGHT.js ************** -->
+    <!-- ***************** INLINE MARKDOWN WITH md-block ***************** -->
+
+    <!-- <link rel="stylesheet" href="../../highlight/styles/default.min.css"> -->
+    <link rel="stylesheet" href="../../highlight/styles/foundation.min.css">
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    <script src="../../highlight/highlight.min.js"></script>
+<!-- 
+default.min.js 
+foundation.min.css 
+routeros.min.css 
+stackoverflow-light.min.css 
+base16/mexico-light.min.css
+-->
+
+
+    <!-- START POST!!! -->
+    <div class="container post-block">
+    <div class="row justify-content-center"> 
+    <div class="col-10">
+
+    <!---------------------------- MARKDOWN md-block -------------------------->
+
+    <md-block>
+        # Re-creating Julio Le Parc's scultpures
+
+        <hr>
+
+        Julio parc is an Argentinian artist whose light-reflecting sculptures captured my attention years ago.
+        I first interacted with his big rouge spheres, and found his use of geometry to be effortlessly pleasing to look at. 
+
+        <img src="sphere_rouge.png"/>  
+        <center><span style="color: #898989; font-size: 9pt;">Julio Le Parc © 2016 Artists Rights Society (ARS), New York/ADAGP</span> </center>
+        <center><span style="color: #898989; font-size: 9pt;">Paris Photo: André Morin </span></center>  
+
+
+    </md-block>
+    <br>
+    <md-block>
+        <img src="original_squares.jpeg"/>  
+        <br>
+
+        When I first started watching Processing tutorials, Le Parc's sculptures were one of the first things I thought of. 
+        The code below documents a 2-dimensional version of how to animate his glass squares 
+        that spin around their central axis. 
+
+
+        The essence of the code is in setting a time axis with periodic sine functions that stretch and shrink 
+        different sides of the quadrilaterals, giving the illusion of their rotation. 
+        The RGB color values are chosen at random independently; though the random ranges of the "R" value 
+        factors in how much the square is stretched, while the "G" and "B" values are consistently chosen from the same range.
+        A simple shadow shape is added for effect. 
+
+    </md-block>
+    
+    <md-block>
+        In Processing-like fashion, the `setup()` function sets the canvas size. Global variables are then created. 
+    </md-block>
+
+
+    <!---------------------------- code -------------------------->
+    <pre><code class="language-python"> <!-- tab sensitive! -->
+        def setup():
+            size(900, 900)
+            frameRate(10)
+
+        rows, cols = 15, 15
+        num_squares = int(rows*cols)
+
+        t = [random(10) for i in range(num_squares)]
+        stretch = [random(-1,1) for i in range(num_squares)]
+    </code></pre>   
+
+    <md-block>
+        The `draw()` function then performs some simple calculations. 
+    </md-block>
+
+    <pre><code class="language-python"> <!-- tab sensitive! -->
+        def draw():
+            global rows, cols, stretch, t, num_squares         # setting global variables  
+            background(color(204, 196, 181))                   # paper color
+
+            noStroke()                                          # no outline for boxes
+            stretch = [stretch[i] - random(-1*abs(-2+t[i]/50), abs(1.8-t[i]/50)) * sin(10*t[i])
+                        for i in range(num_squares)]            # width of boxes
+            t = [t[i] + 2*PI/10 for i in range(num_squares)]    # advance in real time 
+
+            for i in range(rows):
+                for j in range(cols):
+                    index = j+i*cols
+                    centerx = i/1.5*width/cols + width/10 + 75
+                    centery = j/1.5*height/rows + height/10 + 75
+                    x1, y1 = centerx-stretch[index], centery-8+int(random(4))
+                    x2, y2 = centerx-stretch[index], centery+8+int(random(4))
+                    x3, y3 = centerx+stretch[index], centery+8+int(random(4))
+                    x4, y4 = centerx+stretch[index], centery-8+int(random(4))
+
+                    fill(190, 133, 118)                         # shadow color
+                    quad(x1+5, y1+5, x2+5, y2+5, x3+5, y3+5, x4+5, y4+5) 
+
+                    fill(int(random(110+stretch[index], 140)),
+                        int(random(20, 40)), int(random(20, 40)))
+
+                    quad(x1, y1, x2, y2, x3, y3, x4, y4)
+    </code></pre>
+
+    <md-block>
+        <img src="squared_dark.gif"/>  
+        <br>
+
+        That's the final result! 
+    </md-block>
+
+    
+
+
+
+
+    
+    <!-- apply all syntax highlighting to code cells -->
+    <script>hljs.highlightAll();</script> 
+    
+    <!-- copyright footerr -->
+    <div class="row justify-content-center" id="footer"> 
+        <div class="footer col-11 col-sm-11 col-md-10 col-lg-10 col-xl-10" id="footer">
+            <div class="container text-center"> © 2023 Rosita Fu. MIT license. <br></div>
+
+        </div>
+    </div>
+    <!-- end bootstrap column -->
+    </div></div></div>
+
+</body>
+</html>
+

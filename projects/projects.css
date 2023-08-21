@@ -61,7 +61,7 @@
 /* defining font, padding of post heading*/ 
 .post-heading {
     font-family: 'Arvo', sans-serif; 
-    font-size: 15pt;
+    font-size: 14pt;
     color: black !important;
 
     padding-top: 15px;
@@ -80,7 +80,7 @@
 
 .post-desc {
     font-family:  'Source Serif Pro', sans-serif; 
-    font-size: 11pt;
+    font-size: 10pt;
     color: #565656;
     padding-top: 5px;
     padding-left: 30px;
