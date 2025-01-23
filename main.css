@@ -58,12 +58,18 @@ a {
 /* keeping portfolio images fixed-width */
 
 .image-column {
+    align-items: center;
     text-align: center;
+    flex-direction: column; /* Stack images vertically */
 }
 
 .image-column img {
-    width: 500px; /* Set a consistent width */
+    width: 900px; /* Set a consistent width */
     height: auto; /* Maintain aspect ratio */
-}
+    margin-bottom: 20px;
 
+    /* border */
+    border: 3px solid #efefef;
+    transition: border-color 0.3s; /* Smooth transition */
+}
   
