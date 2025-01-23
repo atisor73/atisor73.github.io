@@ -55,4 +55,15 @@ a {
       max-width: 800px !important; 
 }
 
+/* keeping portfolio images fixed-width */
+
+.image-column {
+    text-align: center;
+}
+
+.image-column img {
+    width: 500px; /* Set a consistent width */
+    height: auto; /* Maintain aspect ratio */
+}
+
   
