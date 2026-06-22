@@ -1,131 +1,75 @@
-
-
-.self, .blurb, .name, .footer {
-    /* border-style: dashed; */
+:root {
+    --bg_color: #fcfcfc; /* #f0f0f0*/
+    --nav_not_selected_color: #787878;
 }
 
-#about-container {
-    margin-top: 20px;
+body {
+    background-color: var(--bg_color) !important;
 }
 
-/* #name.row {
-    height: 60px;
-} */
-.name > p {
-    font-family: Jost, sans-serif;
-    font-size: 19pt;
-    text-align: center;
-}
-
-#self-portrait {
-    margin-bottom: 18px;
-    max-width: 100%;
-}
-
-/* contact icons */ 
-.github-icon, .mail-icon {
-    /* color: black !important; */
-    padding-left: 30px;
-    color: #565656 !important;
-}
-
-.fa > p {
-    font-family: Jost, sans-serif;
-    font-size: 11pt;
-    display: inline;
-    color: #696969
-}
-
-/* right hand side description */ 
-.blurb {
-    font-family: Jost, sans-serif;
-    font-size: 12pt;
-}
-
-::selection {
+#navbar {
+    margin-top: 30px !important;
+    width: 90%; /* makes overall bootstrap container narrower */
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13pt;
     color: black;
-    background: #f2bb05;
 }
 
-
-
-
-a.underline {
-    color: black !important;
+a { 
+    text-decoration: none !important; 
+    color: var(--nav_not_selected_color) !important;
 }
 
-/* highlight key words on hover 
-.highlight-container, .highlight {
-    position: relative;
-  }
-  
-.highlight-container {
+.underlined {
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+    text-decoration-thickness: 2px;
+}
+
+/* animating underlines */
+.hover-underline {
     display: inline-block;
-  }
-.highlight-container:before {
-    position: absolute;
-    display: block;
-    content: " ";
-    background-color: #f2bb05;
-    z-index: -1;
-    height: 90%;
-    left: -2%;
-    width: 0%;
-    transition: width 0.5s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .blurb:hover .highlight-container:before {
-    width: 104%;
-  } */
-
-/* underline key words on hover */ 
-  .underline-container, .underline {
     position: relative;
-  }
-  
-.underline-container {
-    display: inline-block;
-  }
-.underline-container:before {
+    color: black; 
+}
+
+.hover-underline::after {
+    content: '';
     position: absolute;
-    display: block;
-    content: " ";
-    border-bottom: 2px solid #f2bb05;
-    z-index: -1;
-    height: 90%;
     width: 100%;
-    /* width: 0%; */
-    transition: width 0.5s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  /* .blurb:hover .underline-container:before {
-    width: 100%;
-  } */
-
-/* a.link-hover-animate-color-change {
-    background: linear-gradient(to right, #cc9f0b, #cc9f0b 50%, black 50%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    background-position: 100%;
-    transition: background-position 275ms ease;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0%;
+    background-color: black;
+    transform-origin: bottom left;
+    transition: transform 0.5s ease-out;
 }
-.blurb:hover .link-hover-animate-color-change {
-    background-position: 0 100%;
-} */
 
-#footer {
-    margin-top: 45px;
-    margin-bottom: 30px;
-    margin-left: 75px;
-    /* margin-top: 60px;
-    margin-left: 10px; */
-    /* font-family: 'Roboto Slab' , sans-serif;
-    font-size: 9pt; */
-    font-family: 'Jost' , sans-serif;
-    font-size: 10.5pt;
-    color: #909090;
+.hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
+
+.container {
+      max-width: 800px !important; 
+}
+
+/* keeping portfolio images fixed-width */
+
+.image-column {
+    align-items: center;
+    text-align: center;
+    flex-direction: column; /* Stack images vertically */
+}
+
+.image-column img {
+    width: 900px; /* Set a consistent width */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px;
+
+    /* border */
+    border: 3px solid #efefef;
+    transition: border-color 0.3s; /* Smooth transition */
+}
+  
